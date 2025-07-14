@@ -211,10 +211,8 @@ ExploitsTab:CreateButton({
     end,
 })
 
--- Create Universal Tab
-local UniversalTab = Window:CreateTab("Universal", 4483362458)
-
-UniversalTab:CreateButton({
+-- Get Every Tools Button
+ExploitsTab:CreateButton({
     Name = "Get Every Tools",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gametoolequipper.lua"))()
