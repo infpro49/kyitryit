@@ -211,6 +211,16 @@ ExploitsTab:CreateButton({
     end,
 })
 
+-- Create Universal Tab
+local UniversalTab = Window:CreateTab("Universal", 4483362458)
+
+UniversalTab:CreateButton({
+    Name = "Get Every Tools",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gametoolequipper.lua"))()
+    end,
+})
+
 -- Spin Loop
 task.spawn(function()
     while task.wait() do
