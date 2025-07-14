@@ -1,0 +1,130 @@
+-- Load Rayfield from your specific URL
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- Wait for the LocalPlayer
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+repeat task.wait() until player and player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+
+-- Create Rayfield Window with key system
+local Window = Rayfield:CreateWindow({
+    Name = "kyi try it",
+    LoadingTitle = "kyi try it Loader",
+    LoadingSubtitle = "By you :)",
+    ConfigurationSaving = {
+        Enabled = false,
+    },
+    KeySystem = true,
+    KeySettings = {
+        Title = "kyi try it Key System",
+        Subtitle = "Key is: kyiuseit12",
+        Note = "Ask the owner for the key!",
+        FileName = "kyi_try_it_Key",
+        SaveKey = false,
+        GrabKeyFromSite = false,
+        Key = {"kyiuseit12"}
+    }
+})
+
+-- Variables
+local spinning = false
+local spinSpeed = 10
+local infJumpEnabled = false
+local noclipEnabled = false
+
+-- Create the Main Tab
+local MainTab = Window:CreateTab("Main", 4483362458)
+
+-- Spin Toggle
+MainTab:CreateToggle({
+    Name = "Spin",
+    CurrentValue = false,
+    Callback = function(Value)
+        spinning = Value
+    end,
+})
+
+-- Spin Speed Slider
+MainTab:CreateSlider({
+    Name = "Spin Speed",
+    Range = {1, 100},
+    Increment = 1,
+    CurrentValue = 10,
+    Callback = function(Value)
+        spinSpeed = Value
+    end,
+})
+
+-- Infinite Jump Toggle
+MainTab:CreateToggle({
+    Name = "Infinite Jump",
+    CurrentValue = false,
+    Callback = function(Value)
+        infJumpEnabled = Value
+    end,
+})
+
+-- Noclip Toggle
+MainTab:CreateToggle({
+    Name = "Noclip",
+    CurrentValue = false,
+    Callback = function(Value)
+        noclipEnabled = Value
+    end,
+})
+
+-- Explode Button
+MainTab:CreateButton({
+    Name = "Explode",
+    Callback = function()
+        local character = player.Character
+        local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+        local hrp = character and character:FindFirstChild("HumanoidRootPart")
+
+        if humanoid and hrp then
+            -- Launch upward
+            hrp.Velocity = Vector3.new(0, 250, 0)
+            task.wait(0.5)
+            -- Reset character
+            humanoid.Health = 0
+        end
+    end,
+})
+
+-- Spin Loop
+task.spawn(function()
+    while task.wait() do
+        if spinning then
+            local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(spinSpeed), 0)
+            end
+        end
+    end
+end)
+
+-- Infinite Jump Logic
+game:GetService("UserInputService").JumpRequest:Connect(function()
+    if infJumpEnabled then
+        local hrp = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.Velocity = Vector3.new(0, 100, 0) -- adjust for higher or lower jump
+        end
+    end
+end)
+
+-- Noclip Loop
+task.spawn(function()
+    while task.wait() do
+        if noclipEnabled then
+            local character = player.Character
+            if character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end
+    end
+end)
