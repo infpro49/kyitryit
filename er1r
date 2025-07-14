@@ -24,14 +24,119 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
--- Variables
+-- Create Universal Exploits Tab
+local ExploitsTab = Window:CreateTab("Universal Exploits", 4483362458)
+
+ExploitsTab:CreateButton({
+    Name = "Fake Lag",
+    Callback = function()
+        local lp = Players.LocalPlayer
+        local fakeLagEnabled = true
+
+        local ScreenGui = Instance.new("ScreenGui")
+        ScreenGui.Parent = lp:WaitForChild("PlayerGui")
+        ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ScreenGui.ResetOnSpawn = false
+
+        local Frame = Instance.new("Frame")
+        Frame.Parent = ScreenGui
+        Frame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+        Frame.BorderSizePixel = 0
+        Frame.Position = UDim2.new(0.3885, 0, 0.4278, 0)
+        Frame.Size = UDim2.new(0, 158, 0, 100)
+        Frame.Active = true
+        Frame.Draggable = true
+
+        local Header = Instance.new("Frame")
+        Header.Parent = Frame
+        Header.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        Header.BorderSizePixel = 0
+        Header.Size = UDim2.new(0, 158, 0, 25)
+
+        local TextLabel = Instance.new("TextLabel")
+        TextLabel.Parent = Header
+        TextLabel.BackgroundTransparency = 1
+        TextLabel.Size = UDim2.new(0, 121, 0, 26)
+        TextLabel.Position = UDim2.new(0.11, 0, -0.015, 0)
+        TextLabel.Font = Enum.Font.Sarpanch
+        TextLabel.Text = "Fake Lag By Backdoor"
+        TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel.TextSize = 16
+
+        local Button = Instance.new("TextButton")
+        Button.Parent = Frame
+        Button.BackgroundColor3 = Color3.fromRGB(205, 84, 75)
+        Button.BorderSizePixel = 0
+        Button.Position = UDim2.new(0.11, 0, 0.4, 0)
+        Button.Size = UDim2.new(0, 121, 0, 37)
+        Button.Font = Enum.Font.SourceSansItalic
+        Button.Text = "Enable"
+        Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+        Button.TextSize = 20
+
+        local fakeLagRunning = false
+        local function toggleFakeLag()
+            while fakeLagRunning do
+                task.wait()
+                local character = lp.Character
+                if character then
+                    local hrp = character:FindFirstChild("HumanoidRootPart")
+                    if hrp then
+                        hrp.Anchored = true
+                        task.wait(0.2)
+                        hrp.Anchored = false
+                        task.wait()
+                    end
+                end
+            end
+        end
+
+        Button.MouseButton1Click:Connect(function()
+            fakeLagRunning = not fakeLagRunning
+            Button.Text = fakeLagRunning and "Enabled" or "Enable"
+            if fakeLagRunning then
+                coroutine.wrap(toggleFakeLag)()
+            end
+        end)
+    end,
+})
+
+ExploitsTab:CreateButton({
+    Name = "Infinite Yield",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end,
+})
+
+ExploitsTab:CreateButton({
+    Name = "Private Chat Watcher",
+    Callback = function()
+        script_key = "QdfQhCocrHCcpMsfKCfVrMapjhbeUMJO"
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/de25675e44d2b892b53180a0ac2e85f9.lua"))()
+    end,
+})
+
+ExploitsTab:CreateButton({
+    Name = "Get Every Tools",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gametoolequipper.lua"))()
+    end,
+})
+
+ExploitsTab:CreateButton({
+    Name = "Washiez Script ((TAKES 10 SECOND TO LOAD OR LESS))",
+    Callback = function()
+        loadstring(game:HttpGet('https://burntribs.space/washiez.lol/script.lua'))()
+    end,
+})
+
+-- Create Main Tab
+local MainTab = Window:CreateTab("Main", 4483362458)
+
 local spinning = false
 local spinSpeed = 10
 local infJumpEnabled = false
 local noclipEnabled = false
-
--- Create Main Tab
-local MainTab = Window:CreateTab("Main", 4483362458)
 
 MainTab:CreateToggle({
     Name = "Spin",
@@ -70,9 +175,9 @@ MainTab:CreateToggle({
 MainTab:CreateButton({
     Name = "Explode",
     Callback = function()
-        local character = player.Character
-        local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-        local hrp = character and character:FindFirstChild("HumanoidRootPart")
+        local char = player.Character
+        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
         if humanoid and hrp then
             hrp.Velocity = Vector3.new(0, 250, 0)
             task.wait(0.5)
@@ -84,138 +189,22 @@ MainTab:CreateButton({
 MainTab:CreateButton({
     Name = "Head In Floor + Spin + Animation",
     Callback = function()
-        local character = player.Character
-        local hrp = character and character:FindFirstChild("HumanoidRootPart")
-        local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-        if character and hrp and humanoid then
-            -- Tilt head into floor
+        local char = player.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+        if hrp and humanoid then
             hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(90), 0, 0)
-            -- Load animation
             local anim = Instance.new("Animation")
-            anim.AnimationId = "rbxassetid://5915772732" -- dab animation
+            anim.AnimationId = "rbxassetid://5915772732"
             local track = humanoid:LoadAnimation(anim)
             track:Play()
-            -- Spin while animation plays
             task.spawn(function()
-                for i = 1, 100 do
+                for _ = 1, 100 do
                     hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(30), 0)
                     task.wait(0.05)
                 end
             end)
         end
-    end,
-})
-
--- Create Universal Exploits Tab
-local ExploitsTab = Window:CreateTab("Universal Exploits", 4483362458)
-
--- Fake Lag
-ExploitsTab:CreateButton({
-    Name = "Fake Lag",
-    Callback = function()
-        local Players = game:GetService("Players")
-        local lp = Players.LocalPlayer
-        local fakeLagEnabled = true
-
-        -- Create ScreenGui
-        local ScreenGui = Instance.new("ScreenGui")
-        ScreenGui.Parent = lp:WaitForChild("PlayerGui")
-        ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        ScreenGui.ResetOnSpawn = false
-
-        -- Frame
-        local Frame = Instance.new("Frame")
-        Frame.Parent = ScreenGui
-        Frame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
-        Frame.BorderSizePixel = 0
-        Frame.Position = UDim2.new(0.3885, 0, 0.4278, 0)
-        Frame.Size = UDim2.new(0, 158, 0, 100)
-        Frame.Active = true
-        Frame.Draggable = true
-
-        -- Header Frame
-        local Frame_2 = Instance.new("Frame")
-        Frame_2.Parent = Frame
-        Frame_2.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-        Frame_2.BorderSizePixel = 0
-        Frame_2.Size = UDim2.new(0, 158, 0, 25)
-
-        -- Label
-        local TextLabel = Instance.new("TextLabel")
-        TextLabel.Parent = Frame_2
-        TextLabel.BackgroundTransparency = 1
-        TextLabel.Size = UDim2.new(0, 121, 0, 26)
-        TextLabel.Position = UDim2.new(0.11, 0, -0.015, 0)
-        TextLabel.Font = Enum.Font.Sarpanch
-        TextLabel.Text = "Fake Lag By Backdoor"
-        TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-        TextLabel.TextSize = 16
-
-        -- Button
-        local TextButton = Instance.new("TextButton")
-        TextButton.Parent = Frame
-        TextButton.BackgroundColor3 = Color3.fromRGB(205, 84, 75)
-        TextButton.BorderSizePixel = 0
-        TextButton.Position = UDim2.new(0.11, 0, 0.4, 0)
-        TextButton.Size = UDim2.new(0, 121, 0, 37)
-        TextButton.Font = Enum.Font.SourceSansItalic
-        TextButton.Text = "Enable"
-        TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        TextButton.TextSize = 20
-
-        local fakeLagRunning = false
-        local fakeLagThread
-
-        local function toggleFakeLag()
-            local lp = game:GetService("Players").LocalPlayer
-            while fakeLagRunning do
-                task.wait()
-                local character = lp.Character
-                if character then
-                    local hrp = character:FindFirstChild("HumanoidRootPart")
-                    if hrp then
-                        hrp.Anchored = true
-                        task.wait(0.2)
-                        hrp.Anchored = false
-                        task.wait()
-                    end
-                end
-            end
-        end
-
-        TextButton.MouseButton1Click:Connect(function()
-            fakeLagRunning = not fakeLagRunning
-            TextButton.Text = fakeLagRunning and "Enabled" or "Enable"
-            if fakeLagRunning then
-                fakeLagThread = coroutine.create(toggleFakeLag)
-                coroutine.resume(fakeLagThread)
-            end
-        end)
-    end,
-})
-
--- Infinite Yield
-ExploitsTab:CreateButton({
-    Name = "Infinite Yield",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-    end,
-})
-
--- Private Chat Watcher
-ExploitsTab:CreateButton({
-    Name = "Private Chat Watcher",
-    Callback = function()
-        script_key = "QdfQhCocrHCcpMsfKCfVrMapjhbeUMJO"
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/de25675e44d2b892b53180a0ac2e85f9.lua"))()
-    end,
-})
-
--- Get Every Tools Button
-ExploitsTab:CreateButton({
-    Name = "Get Every Tools",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gametoolequipper.lua"))()
     end,
 })
 
@@ -245,9 +234,9 @@ end)
 task.spawn(function()
     while task.wait() do
         if noclipEnabled then
-            local character = player.Character
-            if character then
-                for _, part in pairs(character:GetDescendants()) do
+            local char = player.Character
+            if char then
+                for _, part in pairs(char:GetDescendants()) do
                     if part:IsA("BasePart") then
                         part.CanCollide = false
                     end
