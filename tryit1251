@@ -8,19 +8,19 @@ repeat task.wait() until player and player.Character and player.Character:FindFi
 
 -- Create Rayfield Window with KeySystem
 local Window = Rayfield:CreateWindow({
-    Name = "kyi try it",
-    LoadingTitle = "kyi try it Loader",
-    LoadingSubtitle = "By you :)",
+    Name = "er1r's gui",
+    LoadingTitle = "er1r's gui Loader",
+    LoadingSubtitle = "Made by er1r",
     ConfigurationSaving = { Enabled = false },
     KeySystem = true,
     KeySettings = {
-        Title = "kyi try it Key System",
-        Subtitle = "Key is: kyiuseit12",
-        Note = "Ask the owner for the key!",
-        FileName = "kyi_try_it_Key",
+        Title = "er1r's gui Key System",
+        Subtitle = "Made by er1r",
+        Note = "Add/DM er1r_82425 in discord",
+        FileName = "er1r_gui_Key",
         SaveKey = false,
         GrabKeyFromSite = false,
-        Key = {"kyiuseit12"}
+        Key = {"subtobarneyhunter12"}
     }
 })
 
@@ -239,12 +239,4 @@ task.spawn(function()
         if noclipEnabled then
             local character = player.Character
             if character then
-                for _, part in pairs(character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false
-                    end
-                end
-            end
-        end
-    end
-end)
+                for _, part in pairs(character_
