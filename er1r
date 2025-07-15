@@ -137,8 +137,8 @@ ExploitsTab:CreateButton({
         TextLabel.Size = UDim2.new(0, 121, 0, 26)
         TextLabel.Position = UDim2.new(0.11, 0, -0.015, 0)
         TextLabel.Font = Enum.Font.Sarpanch
-        TextLabel.Text = "Fake Lag By Backdoor"
-        TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel.Text = "Fake Lag By er1r"
+        TextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
         TextLabel.TextSize = 16
 
         local Button = Instance.new("TextButton")
