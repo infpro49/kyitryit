@@ -9,16 +9,16 @@ repeat task.wait() until player and player.Character and player.Character:FindFi
 -- Create Rayfield Window with KeySystem
 local Window = Rayfield:CreateWindow({
     Name = "er1r's gui",
-    LoadingTitle = "er1r's gui Loader",
+    LoadingTitle = "Universal Hub more scripts coming soon",
     LoadingSubtitle = "Made by er1r",
     ConfigurationSaving = { Enabled = false },
     KeySystem = true,
     KeySettings = {
-        Title = "er1r's gui Key System",
+        Title = "Keysystem",
         Subtitle = "Made by er1r",
         Note = "Add/DM er1r_82425 in discord for key",
         FileName = "er1r_gui_Key",
-        SaveKey = false,
+        SaveKey = true,
         GrabKeyFromSite = false,
         Key = {"subtobarneyhunter12"}
     }
@@ -42,7 +42,7 @@ MainTab:CreateToggle({
 
 MainTab:CreateSlider({
     Name = "Spin Speed",
-    Range = {1, 100},
+    Range = {1, 300},
     Increment = 1,
     CurrentValue = 10,
     Callback = function(val)
@@ -81,7 +81,7 @@ MainTab:CreateButton({
 })
 
 MainTab:CreateButton({
-    Name = "Head In Floor + Spin + Animation",
+    Name = "Head In Floor + Spin + Animation (broken)",
     Callback = function()
         local char = player.Character
         local hrp = char and char:FindFirstChild("HumanoidRootPart")
