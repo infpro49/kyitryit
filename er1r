@@ -25,7 +25,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 -- Create Main Tab FIRST (will appear left-most)
-local MainTab = Window:CreateTab("Main", 4483362458)
+local MainTab = Window:CreateTab("Misc", 4483362458)
 
 local spinning = false
 local spinSpeed = 10
