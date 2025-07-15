@@ -24,7 +24,85 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
--- Create Universal Exploits Tab
+-- Create Main Tab FIRST (will appear left-most)
+local MainTab = Window:CreateTab("Main", 4483362458)
+
+local spinning = false
+local spinSpeed = 10
+local infJumpEnabled = false
+local noclipEnabled = false
+
+MainTab:CreateToggle({
+    Name = "Spin",
+    CurrentValue = false,
+    Callback = function(val)
+        spinning = val
+    end,
+})
+
+MainTab:CreateSlider({
+    Name = "Spin Speed",
+    Range = {1, 100},
+    Increment = 1,
+    CurrentValue = 10,
+    Callback = function(val)
+        spinSpeed = val
+    end,
+})
+
+MainTab:CreateToggle({
+    Name = "Infinite Jump",
+    CurrentValue = false,
+    Callback = function(val)
+        infJumpEnabled = val
+    end,
+})
+
+MainTab:CreateToggle({
+    Name = "Noclip",
+    CurrentValue = false,
+    Callback = function(val)
+        noclipEnabled = val
+    end,
+})
+
+MainTab:CreateButton({
+    Name = "Explode",
+    Callback = function()
+        local char = player.Character
+        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if humanoid and hrp then
+            hrp.Velocity = Vector3.new(0, 250, 0)
+            task.wait(0.5)
+            humanoid.Health = 0
+        end
+    end,
+})
+
+MainTab:CreateButton({
+    Name = "Head In Floor + Spin + Animation",
+    Callback = function()
+        local char = player.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+        if hrp and humanoid then
+            hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(90), 0, 0)
+            local anim = Instance.new("Animation")
+            anim.AnimationId = "rbxassetid://5915772732"
+            local track = humanoid:LoadAnimation(anim)
+            track:Play()
+            task.spawn(function()
+                for _ = 1, 100 do
+                    hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(30), 0)
+                    task.wait(0.05)
+                end
+            end)
+        end
+    end,
+})
+
+-- Create Universal Exploits tab SECOND (will appear right of Main)
 local ExploitsTab = Window:CreateTab("Universal Exploits", 4483362458)
 
 ExploitsTab:CreateButton({
@@ -127,84 +205,6 @@ ExploitsTab:CreateButton({
     Name = "Washiez Script ((TAKES 10 SECOND TO LOAD OR LESS))",
     Callback = function()
         loadstring(game:HttpGet('https://burntribs.space/washiez.lol/script.lua'))()
-    end,
-})
-
--- Create Main Tab
-local MainTab = Window:CreateTab("Main", 4483362458)
-
-local spinning = false
-local spinSpeed = 10
-local infJumpEnabled = false
-local noclipEnabled = false
-
-MainTab:CreateToggle({
-    Name = "Spin",
-    CurrentValue = false,
-    Callback = function(val)
-        spinning = val
-    end,
-})
-
-MainTab:CreateSlider({
-    Name = "Spin Speed",
-    Range = {1, 100},
-    Increment = 1,
-    CurrentValue = 10,
-    Callback = function(val)
-        spinSpeed = val
-    end,
-})
-
-MainTab:CreateToggle({
-    Name = "Infinite Jump",
-    CurrentValue = false,
-    Callback = function(val)
-        infJumpEnabled = val
-    end,
-})
-
-MainTab:CreateToggle({
-    Name = "Noclip",
-    CurrentValue = false,
-    Callback = function(val)
-        noclipEnabled = val
-    end,
-})
-
-MainTab:CreateButton({
-    Name = "Explode",
-    Callback = function()
-        local char = player.Character
-        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
-        local hrp = char and char:FindFirstChild("HumanoidRootPart")
-        if humanoid and hrp then
-            hrp.Velocity = Vector3.new(0, 250, 0)
-            task.wait(0.5)
-            humanoid.Health = 0
-        end
-    end,
-})
-
-MainTab:CreateButton({
-    Name = "Head In Floor + Spin + Animation",
-    Callback = function()
-        local char = player.Character
-        local hrp = char and char:FindFirstChild("HumanoidRootPart")
-        local humanoid = char and char:FindFirstChildOfClass("Humanoid")
-        if hrp and humanoid then
-            hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(90), 0, 0)
-            local anim = Instance.new("Animation")
-            anim.AnimationId = "rbxassetid://5915772732"
-            local track = humanoid:LoadAnimation(anim)
-            track:Play()
-            task.spawn(function()
-                for _ = 1, 100 do
-                    hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(30), 0)
-                    task.wait(0.05)
-                end
-            end)
-        end
     end,
 })
 
