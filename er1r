@@ -208,6 +208,20 @@ ExploitsTab:CreateButton({
     end,
 })
 
+ExploitsTab:CreateButton({
+    Name = "op c00lgui revival [credits to hyperion]",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hyperionhax/c00lgui/refs/heads/main/CoolGui.lua"))()
+    end,
+})
+
+ExploitsTab:CreateButton({
+    Name = "universal hub [OP]",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/aemos2/Skibidihub/refs/heads/main/SkibidiHUB.txt"))()
+    end,
+})
+
 -- Spin Loop
 task.spawn(function()
     while task.wait() do
